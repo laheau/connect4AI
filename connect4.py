@@ -4,8 +4,11 @@ class Connect4:
     def __init__(self, board = None):
         if board is None:
             self.board = np.zeros((6, 7))
+            self.history = -np.ones((42, 1))
+            self.move_number = 0
         else:
             self.board = board.copy()
+            self.move_number = np.sum(np.abs(board))
 
         if(self.board.shape != (6, 7)):
             raise Exception("board is invalid")
@@ -59,6 +62,8 @@ class Connect4:
             if(self.board[row][move] == 0):
                 self.board[row][move] = self.player
                 self.player = -self.player
+                self.history[self.move_number] = move
+                self.move_number += 1
                 return self.checkWin()
 
             else:
