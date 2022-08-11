@@ -14,7 +14,7 @@ class Model(nn.Module):
         self.activation = nn.ReLU()
         self.linear2 = nn.Linear(100, 100)
         self.softmax = nn.Softmax()
-        
+        self.output = nn.Linear(100, 7)
     def forward(self, x):
         """TODO: Docstring for forward.
 
@@ -25,6 +25,10 @@ class Model(nn.Module):
         x = self.linear1(x)
         x = self.activation(x)
         x = self.linear2(x)
+        x = self.activation(x)
+        x = self.linear2(x)
+        x = self.actication(x)
+        x = self.output(x)
         x = self.softmax(x)
 
 model = Model()
