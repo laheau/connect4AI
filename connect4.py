@@ -19,7 +19,7 @@ class Connect4:
         else:
             raise Exception("board is invalid")
 
-    def checkWin(self):
+    def check_win(self):
         #horizontal
         for row in range(6):
             for column in range(4):
@@ -45,7 +45,7 @@ class Connect4:
 
         return False, 0
 
-    def getLegalActions(self):
+    def get_legal_actions(self):
         legalmoves = []
         for i, col in enumerate(self.board.T):
             if (np.count_nonzero(col==0) == 0):
@@ -55,7 +55,7 @@ class Connect4:
         return legalmoves
 
     def play(self, move):
-        if(move not in self.getLegalActions()):
+        if(move not in self.get_legal_actions()):
             return True, -self.player
         for row in range(6):
 
@@ -64,15 +64,15 @@ class Connect4:
                 self.player = -self.player
                 self.history[self.move_number] = move
                 self.move_number += 1
-                return self.checkWin()
+                return self.check_win()
 
             else:
                 continue
 
-        return self.checkWin()
+        return self.check_win()
 
 
-    def getBoard(self):
+    def get_board(self):
         white = np.copy(self.board)
         white[white <= 0] = 0
         black = -np.copy(self.board)
@@ -81,11 +81,13 @@ class Connect4:
 
 
 
-def printBoard(game):
+def print_board(game):
         if (type(game) == Connect4):
             temp = np.flipud(game.board)
         elif(type(game) == np.ndarray):
             temp = np.flipud(game)
+        else:
+            return 1
         print("-----------------------------")
         for row in range(6):
             for column in range(7):
